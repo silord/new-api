@@ -1,16 +1,12 @@
-# New-API Docker Compose Configuration (Fork Build)
+# New-API Docker Compose Configuration
 #
-# 与上游配置区别：使用 build: . 从本地 Dockerfile 构建二开版本
-# 其余配置与上游一致：默认带 Redis + PostgreSQL
-#
-# 启动：cd /root/new-api && docker compose up -d --build
+# 镜像源：ghcr.io/silord/new-api:deploy
+# 由 GitHub Actions 在 .github/workflows/deploy.yml 中构建并推送
+# 服务器只负责 git pull + docker compose pull + up
 
 services:
   new-api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: silord/new-api:local
+    image: ghcr.io/silord/new-api:deploy
     container_name: new-api
     restart: always
     command: --log-dir /app/logs
