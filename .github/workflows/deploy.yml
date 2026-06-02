@@ -93,6 +93,7 @@ jobs:
             docker compose pull new-api
 
             echo "===== 重启服务 ====="
+            docker compose down --remove-orphans new-api
             docker compose up -d new-api
 
             echo "===== 清理旧镜像 ====="
