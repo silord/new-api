@@ -92,9 +92,8 @@ jobs:
             echo "===== 拉取新镜像 ====="
             docker compose pull new-api
 
-            echo "===== 重启服务 ====="
-            docker compose down --remove-orphans new-api
-            docker compose up -d new-api
+            echo "===== 重启服务（不删 network，redis/postgres 共享） ====="
+            docker compose up -d --force-recreate --no-deps new-api
 
             echo "===== 清理旧镜像 ====="
             docker image prune -f
